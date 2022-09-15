@@ -10,7 +10,9 @@ You can use the composer container to create a new laravel application:
 
 ```docker-compose run --rm composer create-project laravel/laravel . ```
 
-Next, go to `./nginx/certs` and create a new certificate for your local domain using mkcert, by running:
+By default, the nginx config redirect the port 80 to 443, so you need a certificate to use https on local environment. 
+
+To do this, go to `./nginx/certs` and create a new certificate by running this command:
 
 ```mkcert captain.test```
 
