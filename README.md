@@ -29,11 +29,15 @@ You would use them just like you would with their native counterparts, including
 
 ## Usage
 
-Inspired in Laravel Sail, this project has a builder file that allows you to run commands more easily. To run a command, you can use the `./builder` file. For example, to run `php artisan migrate`, you can run `./builder artisan migrate`.
+Inspired in Laravel Sail, this project has a builder file that allows you to run commands more easily.
+
+To run a command, you can use the `./builder` file.
+
+For example, to run `php artisan migrate`, you can run `./builder artisan migrate`.
 
 The builder is just a wrapper for `docker-compose run --rm composer install`, so you can run any command you want.
 
-You can create an alias for the builder file in your `.bashrc` or `.zshrc` file. For example, you can add the following line to your `.zshrc` file:
+You can create an alias for the builder file in your `.bashrc` or `.zshrc` file adding the following line to your `.zshrc`:
 
 ```alias captain='sh ./builder'```
 
@@ -47,7 +51,6 @@ More examples:
 - `captain npm run dev`
 - `captain artisan migrate`
 - `captain artisan db:seed`
-
 
 Three additional containers are included that are not brought up with the webserver stack, and are instead used as "command services". These allow you to run commands that interact with your application's code, without requiring their software to be installed and maintained on the host machine. These are:
 
