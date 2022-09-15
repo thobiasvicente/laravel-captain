@@ -1,4 +1,4 @@
-# Laravel Docker Workflow
+# Laravel Captain Workflow
 
 This is a pretty simplified, but complete, workflow for using Docker and Docker Compose with Laravel development. The included docker-compose.yml file, Dockerfiles, and config files, set up a LEMP stack powering a Laravel application in the `src` directory.
 
