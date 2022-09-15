@@ -10,6 +10,12 @@ You can use the composer container to create a new laravel application:
 
 ```docker-compose run --rm composer create-project laravel/laravel . ```
 
+Next, go to `./nginx/certs` and create a new certificate for your local domain using mkcert, by running:
+
+```mkcert captain.test```
+
+If you don't have mkcert installed, check the [mkcert documentation](https://github.com/FiloSottile/mkcert).
+
 Next, spin up the containers for the full web server stack by running `docker-compose up -d --build nginx`.
 
 After that completes, run the following to install and compile the dependencies for the application:
