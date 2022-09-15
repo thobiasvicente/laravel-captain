@@ -30,7 +30,7 @@ services:
     networks:
       - laravel
   composer:
-    image: composer:2.1.11
+    image: composer:latest
     container_name: composer
     volumes:
       - ./src:/var/www/html
