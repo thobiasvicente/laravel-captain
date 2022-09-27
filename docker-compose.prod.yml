@@ -30,7 +30,9 @@ services:
     networks:
       - laravel
   composer:
-    image: composer:latest
+    build:
+      context: .
+      dockerfile: composer.prod.dockerfile
     container_name: composer
     volumes:
       - ./src:/var/www/html

@@ -1,11 +1,7 @@
-FROM php:8.1-fpm-alpine
+# Get latest Composer
+FROM composer:latest AS composer
 
-ADD ./php/www.conf /usr/local/etc/php-fpm.d/www.conf
-
-RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel
-
-RUN mkdir -p /var/www/html
-
+# Install extensions
 RUN apk update \
     && apk upgrade \
     && apk --no-cache add \
@@ -33,6 +29,3 @@ RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
     && pecl install redis \
     && docker-php-ext-enable redis \
     && apk del pcre-dev ${PHPIZE_DEPS}
-
-RUN chown laravel:laravel /var/www/html
-
