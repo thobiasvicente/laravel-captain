@@ -13,9 +13,10 @@ services:
     volumes:
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
+      # - ./src:/var/www/html
     depends_on:
       - php
-      - redis
+      # - redis
     ports:
       - 80:80
       - 443:443
@@ -27,6 +28,8 @@ services:
       context: .
       dockerfile: php.prod.dockerfile
     container_name: php
+    volumes:
+      - ./src:/var/www/html
     networks:
       - laravel
   composer:
@@ -43,8 +46,10 @@ services:
   artisan:
     build:
       context: .
-      dockerfile: php.prod.dockerfile
+      dockerfile: php.dockerfile
     container_name: artisan
+    volumes:
+      - ./src:/var/www/html
     working_dir: /var/www/html
     entrypoint: ["php", "artisan"]
     networks:
@@ -57,24 +62,6 @@ services:
       - ./src:/var/www/html
     working_dir: /var/www/html
     entrypoint: ["npm"]
-    networks:
-      - laravel
-
-  phpunit:
-    build:
-      context: .
-      dockerfile: php.prod.dockerfile
-    container_name: phpunit
-    working_dir: /var/www/html
-    entrypoint: ["/var/www/html/vendor/bin/phpunit"]
-    networks:
-      - laravel
-
-  redis:
-    image: redis:latest
-    container_name: redis
-    ports:
-      - 6379:6379
     networks:
       - laravel
 

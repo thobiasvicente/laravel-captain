@@ -13,7 +13,7 @@ services:
     depends_on:
       - php
       - mysql
-      - redis
+      # - redis
     ports:
       - 80:80
       - 443:443
@@ -41,21 +41,22 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: laraveldb
-      MYSQL_USER: laravel
-      MYSQL_PASSWORD: secret
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: db_crivialli_new
+      MYSQL_USER: user_crivialli
+      MYSQL_PASSWORD: password_crivialli
+      MYSQL_ROOT_PASSWORD: password_crivialli
     networks:
       - laravel
 
   composer:
     build:
       context: .
-      dockerfile: composer.dockerfile
+      dockerfile: php.dockerfile
     container_name: composer
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
+    entrypoint: ["composer"]
     networks:
       - laravel
 
@@ -72,7 +73,7 @@ services:
       - laravel
 
   npm:
-    image: node:16
+    image: node:latest
     container_name: npm
     volumes: 
       - ./src:/var/www/html
@@ -96,8 +97,9 @@ services:
   redis:
     image: redis:latest
     container_name: redis
-    ports:
-      - 6379:6379
+    command: sh -c 'redis-server --bind 127.0.0.1'
+    # ports:
+    #   - 6379:6379
     networks:
       - laravel
 
